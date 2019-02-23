@@ -6,4 +6,8 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 scalaVersion := "2.12.8"
 
-libraryDependencies += "com.softwaremill.macwire" %% "macros" % "2.3.1"
+libraryDependencies ++= Seq(
+  "org.postgresql"           %  "postgresql" % "42.2.5",
+  "com.typesafe.play"        %% "play-slick" % "4.0.0",
+  "com.softwaremill.macwire" %% "macros"     % "2.3.1"
+)
