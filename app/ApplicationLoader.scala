@@ -8,6 +8,8 @@ import com.softwaremill.macwire._
 import play.api.db.slick.{DbName, SlickComponents}
 import services.{EventService, SlowService}
 import slick.jdbc.JdbcProfile
+import com.softwaremill.tagging._
+import models.CpuIntensiveThreadPool
 
 class MyApplicationLoader extends ApplicationLoader {
   def load(context: Context): Application = {
@@ -20,7 +22,7 @@ class MyComponents(context: Context) extends BuiltInComponentsFromContext(contex
   with SlickComponents{
 
   lazy val db = this.slickApi.dbConfig[JdbcProfile](DbName("default"))
-
+  lazy val cpuThreadPool = actorSystem.dispatchers.lookup("cpu-pool-dispatcher").taggedWith[CpuIntensiveThreadPool]
   lazy val slowService: SlowService = wire[SlowService]
   lazy val eventService: EventService = wire[EventService]
   lazy val homeController: HomeController = wire[HomeController]

@@ -8,3 +8,4 @@ GET     /                                   controllers.HomeController.index
 GET     /all                                controllers.HomeController.all
 GET     /one/:id                            controllers.HomeController.one(id: String)
 GET     /slow/:count                        controllers.HomeController.slowEndpoint(count: Int)
+GET     /slow-safe/:count                   controllers.HomeController.slowSafeEndpoint(count: Int)
